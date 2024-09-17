@@ -1,35 +1,20 @@
 package com.interview.model;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * File class represents a file in the file system File does not support add, has no children File
  * has to have a parent and a name
  */
-public class File implements Node {
+public class File extends FileSystemNode {
 
-  private String name;
-  private Node parent;
-
-  public File(String name, Node parent) {
-    this.name = name;
-    this.parent = parent;
-    parent.add(this);
-  }
-
-  @Override
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  @Override
-  public void setParent(Node parent) {
-    this.parent = parent;
+  /**
+   * Creates a file without a parent
+   *
+   * @param name name of the file
+   */
+  public File(String name) {
+    super(name);
   }
 
   @Override
@@ -38,13 +23,17 @@ public class File implements Node {
   }
 
   @Override
-  public List<Node> getChildren() {
+  public Set<Node> getChildren() {
     throw new UnsupportedOperationException("File does not support getAllChildren operation");
   }
 
   @Override
-  public String getAbsolutePath() {
-    return parent.getAbsolutePath() + "/" + name;
+  public int hashCode() {
+    return super.hashCode();
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    return super.equals(obj);
+  }
 }

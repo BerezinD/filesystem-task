@@ -22,8 +22,8 @@ Return the List of absolute paths to the found nodes.
 5. Absolute path should consist of the names of the folders and files separated by the slash symbol
    ("/")
 
-
 ## Implementation
+
 For the first implementation, the profiler results are as follows:
-```![img.png](img.png)
-```
+![img.png](img.png)
+

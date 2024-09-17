@@ -1,47 +1,26 @@
 package com.interview.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Folder class represents a folder in the file system Folder supports add operations, has children
  * Folder has to have a name If a folder is created without a parent, it is considered as the root
  * directory Folder cannot have Nodes with the same name
+ * <p>
+ * To add files or folders to another directory, use the add method
  */
-public class Folder implements Node {
+public class Folder extends FileSystemNode {
 
-  private String name;
-  private Node parent;
-  private final List<Node> children = new ArrayList<>();
+  private final Set<Node> children = new HashSet<>();
 
   /**
-   * Using this constructor to create the root directory
+   * Creates a folder without a parent. Could be used as a root directory
    *
    * @param name name of the folder
    */
   public Folder(String name) {
-    this.name = name;
-  }
-
-  public Folder(String name, Node parent) {
-    this.name = name;
-    this.parent = parent;
-    this.parent.add(this);
-  }
-
-  @Override
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  @Override
-  public void setParent(Node parent) {
-    this.parent = parent;
+    super(name);
   }
 
   @Override
@@ -50,27 +29,12 @@ public class Folder implements Node {
       throw new IllegalArgumentException("Node already exists");
     }
     children.add(node);
-    node.setParent(this);
+    node.setParentAbsolutePath(getAbsolutePath());
   }
 
   @Override
-  public List<Node> getChildren() {
+  public Set<Node> getChildren() {
     return children;
-  }
-
-  /**
-   * For deep structures this method will be slow Instead, the absolute path could be stored as
-   * different String field and updated on each add operation. This will eliminate the need to
-   * traverse the tree each time and store the Parent reference.
-   *
-   * @return absolute path of the folder
-   */
-  @Override
-  public String getAbsolutePath() {
-    if (parent == null) {
-      return name;
-    }
-    return parent.getAbsolutePath() + "/" + name;
   }
 
 }

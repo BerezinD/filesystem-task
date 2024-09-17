@@ -1,6 +1,6 @@
 package com.interview.model;
 
-import java.util.List;
+import java.util.Set;
 
 public interface Node {
 
@@ -8,11 +8,12 @@ public interface Node {
 
   void setName(String name);
 
-  void setParent(Node parent);
+  void setParentAbsolutePath(String absolutePath);
 
   void add(Node node);
 
-  List<Node> getChildren();
+  // Nodes are stored in a Set, so the order of the children is not guaranteed
+  Set<Node> getChildren();
 
   String getAbsolutePath();
 
